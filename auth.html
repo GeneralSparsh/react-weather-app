@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-body">
+    <div id="authApp" class="auth-app">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="auth-screen active">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h1 class="auth-title">Welcome Back</h1>
+                    <p class="auth-subtitle">Sign in to continue to Weather App</p>
+
+                    <form id="loginForm" class="auth-form">
+                        <div class="input-group">
+                            <div class="input-icon">👤</div>
+                            <input 
+                                type="text" 
+                                id="loginUsername" 
+                                placeholder="Username" 
+                                required
+                                class="auth-input"
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-icon">🔒</div>
+                            <input 
+                                type="password" 
+                                id="loginPassword" 
+                                placeholder="Password (min 6 chars)" 
+                                required
+                                minlength="6"
+                                class="auth-input"
+                            >
+                        </div>
+
+                        <button type="submit" class="auth-btn auth-btn--primary">
+                            Sign In
+                        </button>
+
+                        <button type="button" class="auth-btn auth-btn--secondary" id="showRegisterBtn">
+                            Create Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Screen -->
+        <div id="registerScreen" class="auth-screen">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h1 class="auth-title">Create Account</h1>
+
+                    <form id="registerForm" class="auth-form">
+                        <div class="input-group">
+                            <div class="input-icon">👤</div>
+                            <input 
+                                type="text" 
+                                id="registerUsername" 
+                                placeholder="New username" 
+                                required
+                                class="auth-input"
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-icon">🔒</div>
+                            <input 
+                                type="password" 
+                                id="registerPassword" 
+                                placeholder="New password (min 6 chars)" 
+                                required
+                                minlength="6"
+                                class="auth-input"
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-icon">🔒</div>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                placeholder="Confirm password" 
+                                required
+                                minlength="6"
+                                class="auth-input"
+                            >
+                        </div>
+
+                        <button type="submit" class="auth-btn auth-btn--primary">
+                            Create account
+                        </button>
+
+                        <button type="button" class="auth-btn auth-btn--secondary" id="showLoginBtn">
+                            Back to login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="authLoadingScreen" class="auth-screen auth-loading">
+            <div class="auth-container">
+                <div class="loading-content">
+                    <div class="auth-spinner"></div>
+                    <p>Authenticating...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

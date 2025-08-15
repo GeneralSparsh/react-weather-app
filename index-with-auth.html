@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container">
+                <h1 class="app-title">Weather App</h1>
+                <div class="header-controls">
+                    <button class="btn btn--secondary btn--sm unit-toggle" id="unitToggle">°C</button>
+                    <button class="btn btn--outline btn--sm location-btn" id="locationBtn">
+                        <span class="location-icon">📍</span>
+                        Use My Location
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <input 
+                            type="text" 
+                            class="form-control search-input" 
+                            id="searchInput"
+                            placeholder="Search for a city..."
+                            autocomplete="off"
+                        >
+                        <button class="search-btn" id="searchBtn">🔍</button>
+                        <div class="suggestions-dropdown hidden" id="suggestionsDropdown">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Searches -->
+                <div class="recent-searches hidden" id="recentSearches">
+                    <h3>Recent Searches</h3>
+                    <div class="recent-cities" id="recentCities">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner hidden" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Loading weather data...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message hidden" id="errorMessage">
+            <div class="error-content">
+                <h3>Oops! Something went wrong</h3>
+                <p id="errorText">Unable to fetch weather data. Please try again.</p>
+                <button class="btn btn--primary retry-btn" id="retryBtn">Retry</button>
+            </div>
+        </div>
+
+        <!-- Weather Content -->
+        <main class="weather-content" id="weatherContent">
+            <div class="container">
+                <!-- Current Weather Card -->
+                <div class="weather-card current-weather" id="currentWeatherCard">
+                    <div class="weather-card__header">
+                        <div class="location-info">
+                            <h2 class="city-name" id="cityName">London</h2>
+                            <p class="location-details" id="locationDetails">United Kingdom</p>
+                            <p class="local-time" id="localTime">Monday, 3:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-card__body">
+                        <div class="current-temp-section">
+                            <div class="temp-display">
+                                <span class="current-temp" id="currentTemp">5°</span>
+                                <div class="condition-info">
+                                    <span class="weather-icon" id="weatherIcon">⛅</span>
+                                    <span class="weather-condition" id="weatherCondition">Partly Cloudy</span>
+                                </div>
+                            </div>
+                            <div class="feels-like">
+                                <span>Feels like <span id="feelsLike">2°C</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="weather-details">
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Humidity</span>
+                                    <span class="detail-value" id="humidity">72%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Wind</span>
+                                    <span class="detail-value" id="windSpeed">15 km/h</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Pressure</span>
+                                    <span class="detail-value" id="pressure">1015 mb</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Visibility</span>
+                                    <span class="detail-value" id="visibility">10 km</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">UV Index</span>
+                                    <span class="detail-value" id="uvIndex">1</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Air Quality</span>
+                                    <span class="detail-value air-quality" id="airQuality">Good</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tomorrow's Forecast Card -->
+                <div class="weather-card forecast-weather" id="forecastCard">
+                    <div class="weather-card__header">
+                        <h3>Tomorrow's Forecast</h3>
+                        <p class="forecast-date" id="forecastDate">Tuesday, Aug 12</p>
+                    </div>
+                    
+                    <div class="weather-card__body">
+                        <div class="forecast-content">
+                            <div class="forecast-temp-section">
+                                <div class="forecast-temps">
+                                    <div class="temp-range">
+                                        <span class="temp-high" id="tempHigh">8°</span>
+                                        <span class="temp-low" id="tempLow">2°</span>
+                                    </div>
+                                    <div class="forecast-condition">
+                                        <span class="forecast-icon" id="forecastIcon">🌧️</span>
+                                        <span class="forecast-text" id="forecastCondition">Light Rain</span>
+                                    </div>
+                                </div>
+                                <div class="precipitation">
+                                    <span>Chance of rain: <span id="chanceOfRain">60%</span></span>
+                                </div>
+                            </div>
+                            
+                            <div class="forecast-details">
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Sunrise</span>
+                                        <span class="detail-value" id="sunrise">6:30 AM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Sunset</span>
+                                        <span class="detail-value" id="sunset">8:15 PM</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Max Wind</span>
+                                        <span class="detail-value" id="maxWind">18 km/h</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Avg Humidity</span>
+                                        <span class="detail-value" id="avgHumidity">68%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Alerts -->
+                <div class="weather-alerts hidden" id="weatherAlerts">
+                    <div class="alert-card">
+                        <div class="alert-header">
+                            <span class="alert-icon">⚠️</span>
+                            <h4>Weather Alert</h4>
+                        </div>
+                        <div class="alert-content" id="alertContent">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="container">
+                <p>Powered by <a href="https://weatherapi.com" target="_blank" rel="noopener">WeatherAPI.com</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+
+    <!-- Authentication Check -->
+    <script src="auth-check.js"></script>
+</body>
+</html>
